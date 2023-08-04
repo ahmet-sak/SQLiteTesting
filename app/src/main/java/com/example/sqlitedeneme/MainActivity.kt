@@ -16,21 +16,22 @@ class MainActivity : AppCompatActivity() {
             //myDatabase.execSQL("INSERT INTO students (name, age, studentNo) VALUES ('Can', 18, 153)")
             //myDatabase.execSQL("INSERT INTO students (name, age, studentNo) VALUES ('Temel', 18, 154)")
 
-            val cursor= myDatabase.rawQuery("SELECT * FROM students",null)
+            val cursor= myDatabase.rawQuery("SELECT * FROM students WHERE age=18",null)
 
             val cursorNameRowIndex= cursor.getColumnIndex("name")
             val cursorAgeRowIndex= cursor.getColumnIndex("age")
             val cursorStudentNoRowIndex= cursor.getColumnIndex("studentNo")
+            val cursorIdRowIndex= cursor.getColumnIndex("id")
+
 
             while (cursor.moveToNext()){
                 println("Öğrenci adı: ${cursor.getString(cursorNameRowIndex)}")
                 println("Öğrenci yaşı: ${cursor.getInt(cursorAgeRowIndex)}")
                 println("Öğrenci numarası: ${cursor.getInt(cursorStudentNoRowIndex)}")
+                println("id: ${cursor.getInt(cursorIdRowIndex)}")
             }
 
             cursor.close()
-
-
 
         }catch (e: Exception){
             println(e.message)
